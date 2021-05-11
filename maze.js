@@ -17,16 +17,25 @@ function generateMaze(mazeHeight, mazeWidth) {
   let randomMaze = new createPlainMaze(mazeHeight, mazeWidth);
   for (let height = 0; height < mazeHeight; height++) {
     for (let width = 0; width < mazeWidth; width++) {
-      randomMaze[height][width] = 0;
+      let randomWall = getRandomWall();
+      randomMaze[height][width] = randomWall;
     }
   }
   return randomMaze;
 }
 
+function getRandomWall() {
+  let randomWall = Math.floor(Math.random() * 2);
+  // console.log(randomWall);
+  return randomWall;
+}
+
 function drawMaze(mazeHeight, mazeWidth) {
-  for (w = 0; w < mazeWidth; w++) {
-    var div = document.createElement('div');
-    ul.appendChild(div).classList.add('wall');
+  for (height = 0; height < mazeHeight; height++) {
+    for (width = 0; width < mazeWidth; width++) {
+      var div = document.createElement('div');
+      ul.appendChild(div).classList.add('wall');
+    }
   }
 }
 
@@ -34,4 +43,4 @@ let randomMaze = new generateMaze(mazeHeight, mazeWidth);
 
 console.table(randomMaze);
 
-drawMaze(2, 2);
+drawMaze(mazeHeight, mazeWidth);
