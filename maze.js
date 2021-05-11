@@ -7,8 +7,8 @@ let ul = document.querySelector("ul");
 
 function createPlainMaze(mazeHeight, mazeWidth) {
   let plainMaze = new Array(mazeHeight);
-  for (let width = 0; width < mazeHeight; width++) {
-    plainMaze[width] = new Array(mazeWidth);
+  for (let height = 0; height < mazeHeight; height++) {
+    plainMaze[height] = new Array(mazeWidth);
   }
   console.table(plainMaze);
   return plainMaze;
