@@ -1,5 +1,5 @@
+let mazeHeight = 8;
 let mazeWidth = 8;
-let mazeHeight = 10;
 
 let maze = document.getElementById('maze');
 let corridor = document.getElementById('corridor');
