@@ -1,5 +1,5 @@
-let mazeHeight = 8;
-let mazeWidth = 8;
+let mazeHeight = 4;
+let mazeWidth = 7;
 
 let maze = document.getElementById('maze');
 let corridor = document.getElementById('corridor');
@@ -10,13 +10,14 @@ function createPlainMaze(mazeHeight, mazeWidth) {
   for (let width = 0; width < mazeHeight; width++) {
     plainMaze[width] = new Array(mazeWidth);
   }
+  console.table(plainMaze);
   return plainMaze;
 }
 
 function generateMaze(mazeHeight, mazeWidth) {
   let randomMaze = new createPlainMaze(mazeHeight, mazeWidth);
-  for (let height = 0; height < mazeHeight; height++) {
-    for (let width = 0; width < mazeWidth; width++) {
+  for (let width = 0; width < mazeWidth; width++) {
+    for (let height = 0; height < mazeHeight; height++) {
       let randomWall = getRandomWall();
       randomMaze[height][width] = randomWall;
     }
@@ -31,8 +32,8 @@ function getRandomWall() {
 }
 
 function drawMaze(mazeHeight, mazeWidth) {
-  for (height = 0; height < mazeHeight; height++) {
-    for (width = 0; width < mazeWidth; width++) {
+  for (width = 0; width < mazeWidth; width++) {
+    for (height = 0; height < mazeHeight; height++) {
       var div = document.createElement('div');
       ul.appendChild(div).classList.add('wall');
     }
@@ -40,7 +41,6 @@ function drawMaze(mazeHeight, mazeWidth) {
 }
 
 let randomMaze = new generateMaze(mazeHeight, mazeWidth);
-
 console.table(randomMaze);
 
-drawMaze(mazeHeight, mazeWidth);
+// drawMaze(mazeHeight, mazeWidth);
