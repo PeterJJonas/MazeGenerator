@@ -1,13 +1,16 @@
-let mazeHeight = 11;
-let mazeWidth = 50;
+let mazeHeight = 19;
+let mazeWidth = 16;
 const maze = document.getElementById('maze');
 const gameScreen = document.getElementById('gamescreen')
 
 const screenWidth  = window.innerWidth || document.documentElement.clientWidth ||
 document.body.clientWidth;
+const screenHight  = window.innerHight || document.documentElement.clientHight ||
+document.body.clientHight;
+
 
 const checkScreenSize = (mazeWidth, screenWidth) => {
-  if (mazeWidth * 20 > screenWidth) {
+  if ((mazeWidth * 20) + 40 > screenWidth) {
     gameScreen.style.justifyContent = 'left';
   }
 }
