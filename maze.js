@@ -1,6 +1,16 @@
 let mazeHeight = 11;
-let mazeWidth = 13;
+let mazeWidth = 50;
 const maze = document.getElementById('maze');
+const gameScreen = document.getElementById('gamescreen')
+
+const screenWidth  = window.innerWidth || document.documentElement.clientWidth ||
+document.body.clientWidth;
+
+const checkScreenSize = (mazeWidth, screenWidth) => {
+  if (mazeWidth * 20 > screenWidth) {
+    gameScreen.style.justifyContent = 'left';
+  }
+}
 
 const drawMaze = (mazeHeight, mazeWidth) => {
   for (height = 0; height < mazeHeight; height++) {
@@ -49,5 +59,7 @@ function generateRandomMaze(mazeHeight, mazeWidth) {
 const randomMaze = new generateRandomMaze(mazeHeight, mazeWidth);
 
 createMazeBorder(mazeHeight, mazeWidth);
+
+checkScreenSize(mazeWidth, screenWidth);
 
 drawMaze(mazeHeight, mazeWidth);
