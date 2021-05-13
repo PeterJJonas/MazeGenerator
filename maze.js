@@ -1,21 +1,33 @@
 let mazeHeight = 19;
 let mazeWidth = 16;
+// const button = document.getElementById('getMazeSize');
+
 const maze = document.getElementById('maze');
 const gameScreen = document.getElementById('gamescreen')
 
-const screenWidth  = window.innerWidth || document.documentElement.clientWidth ||
-document.body.clientWidth;
-const screenHight  = window.innerHight || document.documentElement.clientHight ||
-document.body.clientHight;
+const screenWidth  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+const screenHight  = window.innerHight || document.documentElement.clientHight || document.body.clientHight;
 
+function getMazeSize () {
+  mazeHeight = document.getElementById("mazeHeight").value;
+  mazeWidth = document.getElementById("mazeWidth").value;
+  if (mazeHeight && mazeWidth) {
+    while (maze.firstChild) {
+      maze.firstChild.remove()
+    }
+  }
+  console.log(mazeHeight);
+  console.log(mazeWidth);
+  // putMazeOnScreen(mazeHeight, mazeWidth, screenWidth);
+}
 
-const checkScreenSize = (mazeWidth, screenWidth) => {
+function checkScreenSize(mazeWidth, screenWidth) {
   if ((mazeWidth * 20) + 40 > screenWidth) {
     gameScreen.style.justifyContent = 'left';
   }
 }
 
-const drawMaze = (mazeHeight, mazeWidth) => {
+function drawMaze(mazeHeight, mazeWidth) {
   for (height = 0; height < mazeHeight; height++) {
     for (width = 0; width < mazeWidth; width++) {
       const div = document.createElement('div');
@@ -28,14 +40,14 @@ const drawMaze = (mazeHeight, mazeWidth) => {
   }
 }
 
-const createMazeBorder = (mazeHeight, mazeWidth) => {
+function createMazeBorder(mazeHeight, mazeWidth) {
   const mazeHeightPixel = mazeHeight * 20;
   maze.style.height = mazeHeightPixel + 'px';
   const mazeWidthPixel = mazeWidth * 20;
   maze.style.width = mazeWidthPixel + 'px';
 }
 
-const createRandomWall = () => {
+function createRandomWall() {
   const randomWall = Math.floor(Math.random() * 2);
   return randomWall;
 }
@@ -59,10 +71,10 @@ function generateRandomMaze(mazeHeight, mazeWidth) {
   return randomMaze;
 }
 
-const randomMaze = new generateRandomMaze(mazeHeight, mazeWidth);
-
-createMazeBorder(mazeHeight, mazeWidth);
-
-checkScreenSize(mazeWidth, screenWidth);
-
-drawMaze(mazeHeight, mazeWidth);
+// function putMazeOnScreen(mazeHeight, mazeWidth, screenWidth) {
+  const randomMaze = new generateRandomMaze(mazeHeight, mazeWidth);
+  createMazeBorder(mazeHeight, mazeWidth);
+  checkScreenSize(mazeWidth, screenWidth);
+  // delete old maze if exist
+  drawMaze(mazeHeight, mazeWidth);
+// }
