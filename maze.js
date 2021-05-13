@@ -5,6 +5,7 @@ let mazeWidth = 16;
 const maze = document.getElementById('maze');
 const gameScreen = document.getElementById('gamescreen')
 
+// make as a function
 const screenWidth  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 const screenHight  = window.innerHight || document.documentElement.clientHight || document.body.clientHight;
 
@@ -16,9 +17,7 @@ function getMazeSize () {
       maze.firstChild.remove()
     }
   }
-  console.log(mazeHeight);
-  console.log(mazeWidth);
-  // putMazeOnScreen(mazeHeight, mazeWidth, screenWidth);
+  putMazeOnScreen();
 }
 
 function checkScreenSize(mazeWidth, screenWidth) {
@@ -71,10 +70,11 @@ function generateRandomMaze(mazeHeight, mazeWidth) {
   return randomMaze;
 }
 
-// function putMazeOnScreen(mazeHeight, mazeWidth, screenWidth) {
-  const randomMaze = new generateRandomMaze(mazeHeight, mazeWidth);
+function putMazeOnScreen() {
+  randomMaze = new generateRandomMaze(mazeHeight, mazeWidth);
   createMazeBorder(mazeHeight, mazeWidth);
   checkScreenSize(mazeWidth, screenWidth);
-  // delete old maze if exist
   drawMaze(mazeHeight, mazeWidth);
-// }
+}
+
+putMazeOnScreen();
