@@ -2,7 +2,8 @@ const initMazeHeight = 19;
 const initMazeWidth = 16;
 
 const maze = document.getElementById('maze');
-const gameScreen = document.getElementById('gamescreen')
+const gameScreen = document.getElementById('gamescreen');
+const enter = document.getElementById('enter');
 
 // make as a function
 const screenWidth  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -77,3 +78,4 @@ function putMazeOnScreen(mazeHeight,mazeWidth) {
 }
 
 putMazeOnScreen(initMazeHeight, initMazeWidth);
+enter.addEventListener('click', getMazeSize);
