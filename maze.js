@@ -25,7 +25,7 @@ function checkScreenSize(mazeWidth, screenWidth) {
   }
 }
 
-function drawMaze(mazeHeight, mazeWidth) {
+function drawMaze(mazeHeight, mazeWidth, randomMaze) {
   for (height = 0; height < mazeHeight; height++) {
     for (width = 0; width < mazeWidth; width++) {
       const div = document.createElement('div');
@@ -70,10 +70,10 @@ function generateRandomMaze(mazeHeight, mazeWidth) {
 }
 
 function putMazeOnScreen(mazeHeight,mazeWidth) {
-  randomMaze = new generateRandomMaze(mazeHeight, mazeWidth);
+  const randomMaze = new generateRandomMaze(mazeHeight, mazeWidth);
   createMazeBorder(mazeHeight, mazeWidth);
   checkScreenSize(mazeWidth, screenWidth);
-  drawMaze(mazeHeight, mazeWidth);
+  drawMaze(mazeHeight, mazeWidth, randomMaze);
 }
 
 putMazeOnScreen(initMazeHeight, initMazeWidth);
