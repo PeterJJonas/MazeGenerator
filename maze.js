@@ -16,8 +16,8 @@ function getMazeSize () {
     while (maze.firstChild) {
       maze.firstChild.remove()
     }
+    putMazeOnScreen();
   }
-  putMazeOnScreen();
 }
 
 function checkScreenSize(mazeWidth, screenWidth) {
