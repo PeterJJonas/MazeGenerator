@@ -9,8 +9,8 @@ const enter = document.getElementById('enter');
 function getMazeSize () {
   const getMazeDepth = document.getElementById("mazeDepth").value;
   const getMazeWidth = document.getElementById("mazeWidth").value;
-  const mazeDepth = getMazeDepth * 1;
-  const mazeWidth = getMazeWidth * 1;
+  const mazeDepth = Math.round(getMazeDepth * 1);
+  const mazeWidth = Math.round(getMazeWidth * 1);
   if (Number.isFinite(mazeDepth) && Number.isFinite(mazeWidth)) {
     if (mazeDepth && mazeWidth) {
       while (maze.firstChild) {
