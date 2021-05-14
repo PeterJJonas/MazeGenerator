@@ -1,4 +1,4 @@
-const initMazeHeight = 19;
+const initMazeDepth = 19;
 const initMazeWidth = 16;
 
 const maze = document.getElementById('maze');
@@ -7,16 +7,16 @@ const enter = document.getElementById('enter');
 
 
 function getMazeSize () {
-  const getMazeHeight = document.getElementById("mazeHeight").value;
+  const getMazeDepth = document.getElementById("mazeDepth").value;
   const getMazeWidth = document.getElementById("mazeWidth").value;
-  mazeHeight = getMazeHeight * 1;
-  mazeWidth = getMazeWidth * 1;
-  if (Number.isFinite(mazeHeight) && Number.isFinite(mazeWidth)) {
-    if (mazeHeight && mazeWidth) {
+  const mazeDepth = getMazeDepth * 1;
+  const mazeWidth = getMazeWidth * 1;
+  if (Number.isFinite(mazeDepth) && Number.isFinite(mazeWidth)) {
+    if (mazeDepth && mazeWidth) {
       while (maze.firstChild) {
         maze.firstChild.remove()
       }
-      putMazeOnScreen(mazeHeight, mazeWidth);
+      putMazeOnScreen(mazeDepth, mazeWidth);
     }
   }
 }
@@ -31,11 +31,11 @@ function checkScreenSize(mazeWidth) {
   }
 }
 
-function drawMaze(mazeHeight, mazeWidth, randomMaze) {
-  for (height = 0; height < mazeHeight; height++) {
+function drawMaze(mazeDepth, mazeWidth, randomMaze) {
+  for (Depth = 0; Depth < mazeDepth; Depth++) {
     for (width = 0; width < mazeWidth; width++) {
       const div = document.createElement('div');
-      if (randomMaze[height][width] === 1){
+      if (randomMaze[Depth][width] === 1){
         maze.appendChild(div).classList.add('wall');
       } else {
         maze.appendChild(div).classList.add('corridor');
@@ -44,9 +44,9 @@ function drawMaze(mazeHeight, mazeWidth, randomMaze) {
   }
 }
 
-function createMazeBorder(mazeHeight, mazeWidth) {
-  const mazeHeightPixel = mazeHeight * 20;
-  maze.style.height = mazeHeightPixel + 'px';
+function createMazeBorder(mazeDepth, mazeWidth) {
+  const mazeDepthPixel = mazeDepth * 20;
+  maze.style.Depth = mazeDepthPixel + 'px';
   const mazeWidthPixel = mazeWidth * 20;
   maze.style.width = mazeWidthPixel + 'px';
 }
@@ -56,39 +56,41 @@ function createRandomWall() {
   return randomWall;
 }
 
-function createPlainMaze(mazeHeight, mazeWidth) {
-  const plainMaze = new Array(mazeHeight);
-  for (height = 0; height < mazeHeight; height++) {
-    plainMaze[height] = new Array(mazeWidth);
+function createPlainMaze(mazeDepth, mazeWidth) {
+  const plainMaze = new Array(mazeDepth);
+  for (Depth = 0; Depth < mazeDepth; Depth++) {
+    plainMaze[Depth] = new Array(mazeWidth);
   }
   return plainMaze;
 }
 
-function generateRandomMaze(mazeHeight, mazeWidth) {
-  const randomMaze = new createPlainMaze(mazeHeight, mazeWidth);
+function generateRandomMaze(mazeDepth, mazeWidth) {
+  const randomMaze = new createPlainMaze(mazeDepth, mazeWidth);
   for (width = 0; width < mazeWidth; width++) {
-    for (height = 0; height < mazeHeight; height++) {
+    for (Depth = 0; Depth < mazeDepth; Depth++) {
       const createWall = createRandomWall();
-      randomMaze[height][width] = createWall;
+      randomMaze[Depth][width] = createWall;
     }
   }
   return randomMaze;
 }
 
-function putMazeOnScreen(mazeHeight,mazeWidth) {
-  const randomMaze = new generateRandomMaze(mazeHeight, mazeWidth);
-  createMazeBorder(mazeHeight, mazeWidth);
+function putMazeOnScreen(mazeDepth,mazeWidth) {
+  const randomMaze = new generateRandomMaze(mazeDepth, mazeWidth);
+  createMazeBorder(mazeDepth, mazeWidth);
   checkScreenSize(mazeWidth);
-  drawMaze(mazeHeight, mazeWidth, randomMaze);
+  drawMaze(mazeDepth, mazeWidth, randomMaze);
 }
 
-putMazeOnScreen(initMazeHeight, initMazeWidth);
+putMazeOnScreen(initMazeDepth, initMazeWidth);
+
+
 
 enter.addEventListener('click', getMazeSize);
 
-mazeHeight.addEventListener('keyup',function(e){
+mazeDepth.addEventListener('keyup',function(e){
     if (e.keyCode === 13) {
-      if (mazeHeight.value) {
+      if (mazeDepth.value) {
         document.getElementById('mazeWidth').focus();
       } else {
         return;
