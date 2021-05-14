@@ -5,13 +5,10 @@ const maze = document.getElementById('maze');
 const gameScreen = document.getElementById('gamescreen');
 const enter = document.getElementById('enter');
 
-// make as a function
-const screenWidth  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-const screenHight  = window.innerHight || document.documentElement.clientHight || document.body.clientHight;
 
 function getMazeSize () {
-  getMazeHeight = document.getElementById("mazeHeight").value;
-  getMazeWidth = document.getElementById("mazeWidth").value;
+  const getMazeHeight = document.getElementById("mazeHeight").value;
+  const getMazeWidth = document.getElementById("mazeWidth").value;
   if (getMazeHeight && getMazeWidth) {
     while (maze.firstChild) {
       maze.firstChild.remove()
@@ -20,9 +17,13 @@ function getMazeSize () {
   }
 }
 
-function checkScreenSize(mazeWidth, screenWidth) {
+function checkScreenSize(mazeWidth) {
+  const screenWidth  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  // const screenHight  = window.innerHight || document.documentElement.clientHight || document.body.clientHight;
   if ((mazeWidth * 20) + 40 > screenWidth) {
     gameScreen.style.justifyContent = 'left';
+  } else {
+    gameScreen.style.justifyContent = 'center';
   }
 }
 
@@ -73,7 +74,7 @@ function generateRandomMaze(mazeHeight, mazeWidth) {
 function putMazeOnScreen(mazeHeight,mazeWidth) {
   const randomMaze = new generateRandomMaze(mazeHeight, mazeWidth);
   createMazeBorder(mazeHeight, mazeWidth);
-  checkScreenSize(mazeWidth, screenWidth);
+  checkScreenSize(mazeWidth);
   drawMaze(mazeHeight, mazeWidth, randomMaze);
 }
 
