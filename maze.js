@@ -82,8 +82,6 @@ function putMazeOnScreen(mazeDepth,mazeWidth) {
 
 putMazeOnScreen(initMazeDepth, initMazeWidth);
 
-
-
 enter.addEventListener('click', getMazeSize);
 
 mazeDepth.addEventListener('keyup',function(e) {
