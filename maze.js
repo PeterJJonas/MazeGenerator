@@ -88,9 +88,10 @@ putMazeOnScreen(initMazeDepth, initMazeWidth);
 
 enter.addEventListener('click', getMazeSize);
 
-mazeDepth.addEventListener('keyup',function(e){
+mazeDepth.addEventListener('keyup',function(e) {
     if (e.keyCode === 13) {
-      if (mazeDepth.value) {
+      const isNumber = mazeDepth.value * 1;
+      if (mazeDepth.value && Number.isFinite(isNumber) && isNumber > 0) {
         document.getElementById('mazeWidth').focus();
       } else {
         return;
@@ -98,9 +99,10 @@ mazeDepth.addEventListener('keyup',function(e){
   }
 });
 
-mazeWidth.addEventListener('keyup',function(e){
+mazeWidth.addEventListener('keyup',function(e) {
     if (e.keyCode === 13) {
-      if (mazeWidth.value) {
+    const isNumber = mazeWidth.value * 1;
+      if (mazeWidth.value && Number.isFinite(isNumber) && isNumber > 0) {
         document.getElementById('enter').focus();
         getMazeSize();
       }
