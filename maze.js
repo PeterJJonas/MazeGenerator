@@ -9,11 +9,15 @@ const enter = document.getElementById('enter');
 function getMazeSize () {
   const getMazeHeight = document.getElementById("mazeHeight").value;
   const getMazeWidth = document.getElementById("mazeWidth").value;
-  if (getMazeHeight && getMazeWidth) {
-    while (maze.firstChild) {
-      maze.firstChild.remove()
+  mazeHeight = getMazeHeight * 1;
+  mazeWidth = getMazeWidth * 1;
+  if (Number.isFinite(mazeHeight) && Number.isFinite(mazeWidth)) {
+    if (mazeHeight && mazeWidth) {
+      while (maze.firstChild) {
+        maze.firstChild.remove()
+      }
+      putMazeOnScreen(mazeHeight, mazeWidth);
     }
-    putMazeOnScreen(getMazeHeight, getMazeWidth);
   }
 }
 
