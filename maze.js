@@ -79,4 +79,24 @@ function putMazeOnScreen(mazeHeight,mazeWidth) {
 }
 
 putMazeOnScreen(initMazeHeight, initMazeWidth);
+
 enter.addEventListener('click', getMazeSize);
+
+mazeHeight.addEventListener('keyup',function(e){
+    if (e.keyCode === 13) {
+      if (mazeHeight.value) {
+        document.getElementById('mazeWidth').focus();
+      } else {
+        return;
+      }
+  }
+});
+
+mazeWidth.addEventListener('keyup',function(e){
+    if (e.keyCode === 13) {
+      if (mazeWidth.value) {
+        document.getElementById('enter').focus();
+        getMazeSize();
+      }
+  }
+});
