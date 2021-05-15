@@ -5,17 +5,19 @@
 }
 
 #input {
-  display: flex;
+  text-align: center;
+  max-width: 400px;
+  margin: auto;
+  /* display: flex;
   flex-wrap: wrap;
   padding: 10px;
-  text-align: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 #mazeDepth, #mazeWidth, #enter {
   width: auto;
   height: auto;
-  font-size: 3vw;
+  font-size: 6vw;
 }
 
 #gamescreen {
@@ -44,4 +46,16 @@
   height: 20px; /* depth in code!*/
   float: left;
   background-color: #000;
+}
+
+@media only screen and (min-width: 780px) {
+  #mazeDepth, #mazeWidth, #enter {
+    font-size: 4vw;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #mazeDepth, #mazeWidth, #enter {
+    font-size: 2vw;
+  }
 }
