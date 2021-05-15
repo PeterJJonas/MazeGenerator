@@ -13,13 +13,14 @@
 }
 
 #mazeDepth, #mazeWidth, #enter {
-  width: 100px;
+  width: auto;
+  height: auto;
   font-size: 3vw;
 }
 
 #gamescreen {
   display: flex;
-  flex-wrap: wrap
+  flex-wrap: wrap;
   text-align: center;
   justify-content: center;
 }
