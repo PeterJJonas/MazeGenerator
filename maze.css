@@ -52,14 +52,13 @@ table {
   background-color:  #e8e4c9;
 }
 
-#input {
+#entersize {
   text-align: center;
-  max-width: 400px;
   margin: auto;
 }
 
 #mazeDepth, #mazeWidth, #enter {
-  width: auto;
+  width: 35vw;
   height: auto;
   font-size: 6vw;
 }
@@ -74,20 +73,26 @@ table {
 #maze {
   margin: 20px;
   border: 20px solid #333;
+  padding: 0px;
   position: absolute;
 }
 
 .corridor {
   width: 18px;
   height: 18px; /* depth in code!*/
+  margin: 0px;
+  padding: 0px;
   float: left;
   border: 1px solid #000;
   background-color: #a9a9a9;
 }
 
 .wall {
-  width: 20px;
-  height: 20px; /* depth in code!*/
+  width: 18px;
+  height: 18px; /* depth in code!*/
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid #000;
   float: left;
   background-color: #000;
 }
