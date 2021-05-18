@@ -59,25 +59,32 @@ function createPlainMaze(mazeDepth, mazeWidth) {
   for (depth = 0; depth < mazeDepth; depth++) {
     plainMaze[depth] = new Array(mazeWidth);
   }
+  for (width = 0; width < mazeWidth; width++) {
+    for (depth = 0; depth < mazeDepth; depth++) {
+      plainMaze[depth][width] = 1;
+    }
+  }
   return plainMaze;
 }
 
 function generateRandomMaze(mazeDepth, mazeWidth) {
-  const randomMaze = new createPlainMaze(mazeDepth, mazeWidth);
+  const mazeBluePrint = new createPlainMaze(mazeDepth, mazeWidth);
   for (width = 0; width < mazeWidth; width++) {
     for (depth = 0; depth < mazeDepth; depth++) {
-      const createWall = createRandomWall();
-      randomMaze[depth][width] = createWall;
+      const isNotWall = createRandomWall();
+      if (isNotWall === 0) {
+        mazeBluePrint[depth][width] = 0;
+      }
     }
   }
-  return randomMaze;
+  return mazeBluePrint;
 }
 
 function putMazeOnScreen(mazeDepth,mazeWidth) {
-  const randomMaze = new generateRandomMaze(mazeDepth, mazeWidth);
+  const mazeBluePrint = new generateRandomMaze(mazeDepth, mazeWidth);
   createMazeBorder(mazeDepth, mazeWidth);
   checkScreenSize(mazeWidth);
-  drawMaze(mazeDepth, mazeWidth, randomMaze);
+  drawMaze(mazeDepth, mazeWidth, mazeBluePrint);
 }
 
 putMazeOnScreen(initMazeDepth, initMazeWidth);
