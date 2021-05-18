@@ -84,8 +84,8 @@ putMazeOnScreen(initMazeDepth, initMazeWidth);
 
 enter.addEventListener('click', getMazeSize);
 
-mazeDepth.addEventListener('keyup',function(e) {
-    if (e.keyCode === 13) {
+mazeDepth.addEventListener('keyup',function(hitEnter) {
+    if (hitEnter.keyCode === 13) {
       const depthNumber = mazeDepth.value * 1;
       const widthNumber = mazeWidth.value * 1;
       if (100 > depthNumber && depthNumber> 0) {
@@ -99,8 +99,8 @@ mazeDepth.addEventListener('keyup',function(e) {
   }
 });
 
-mazeWidth.addEventListener('keyup',function(e) {
-    if (e.keyCode === 13) {
+mazeWidth.addEventListener('keyup',function(hitEnter) {
+    if (hitEnter.keyCode === 13) {
       const widthNumber = mazeWidth.value * 1;
       const depthNumber = mazeDepth.value * 1;
       if (100 > widthNumber && widthNumber > 0) {
