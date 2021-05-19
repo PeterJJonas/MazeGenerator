@@ -44,7 +44,7 @@ function drawMaze(mazeDepth, mazeWidth, mazeBluePrint) {
 
 function createMazeBorder(mazeDepth, mazeWidth) {
   const mazeDepthInPixel = mazeDepth * 20;
-  maze.style.Depth = mazeDepthInPixel + 'px';
+  maze.style.height = mazeDepthInPixel + 'px';
   const mazeWidthInPixel = mazeWidth * 20;
   maze.style.width = mazeWidthInPixel + 'px';
 }
