@@ -59,8 +59,8 @@ function createPlainMaze(mazeDepth, mazeWidth) {
   for (depth = 0; depth < mazeDepth; depth++) {
     plainMaze[depth] = new Array(mazeWidth);
   }
-  for (width = 0; width < mazeWidth; width++) {
-    for (depth = 0; depth < mazeDepth; depth++) {
+   for (depth = 0; depth < mazeDepth; depth++) {
+    for (width = 0; width < mazeWidth; width++) {
       plainMaze[depth][width] = 1;
     }
   }
@@ -69,8 +69,8 @@ function createPlainMaze(mazeDepth, mazeWidth) {
 
 function generateRandomMaze(mazeDepth, mazeWidth) {
   const mazeBluePrint = new createPlainMaze(mazeDepth, mazeWidth);
-  for (width = 0; width < mazeWidth; width++) {
-    for (depth = 0; depth < mazeDepth; depth++) {
+   for (depth = 0; depth < mazeDepth; depth++) {
+    for (width = 0; width < mazeWidth; width++) {
       const isNotWall = createRandomWall();
       if (isNotWall === 0) {
         mazeBluePrint[depth][width] = 0;
@@ -108,8 +108,8 @@ mazeDepth.addEventListener('keyup',function(hitEnter) {
 
 mazeWidth.addEventListener('keyup',function(hitEnter) {
     if (hitEnter.keyCode === 13) {
-      const widthNumber = mazeWidth.value * 1;
       const depthNumber = mazeDepth.value * 1;
+      const widthNumber = mazeWidth.value * 1;
       if (100 > widthNumber && widthNumber > 0) {
         if (100 > depthNumber && depthNumber> 0) {
           document.getElementById('enter').focus();
