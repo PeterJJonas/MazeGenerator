@@ -67,7 +67,7 @@ function createPlainMaze(mazeDepth, mazeWidth) {
   return plainMaze;
 }
 
-function generateRandomMaze(mazeDepth, mazeWidth) {
+function generateMazeBlueprint(mazeDepth, mazeWidth) {
   const mazeBluePrint = new createPlainMaze(mazeDepth, mazeWidth);
    for (depth = 0; depth < mazeDepth; depth++) {
     for (width = 0; width < mazeWidth; width++) {
@@ -81,7 +81,7 @@ function generateRandomMaze(mazeDepth, mazeWidth) {
 }
 
 function putMazeOnScreen(mazeDepth,mazeWidth) {
-  const mazeBluePrint = new generateRandomMaze(mazeDepth, mazeWidth);
+  const mazeBluePrint = new generateMazeBlueprint(mazeDepth, mazeWidth);
   createMazeBorder(mazeDepth, mazeWidth);
   checkScreenSize(mazeWidth);
   drawMaze(mazeDepth, mazeWidth, mazeBluePrint);
