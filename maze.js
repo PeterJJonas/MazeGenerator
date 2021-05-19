@@ -49,11 +49,6 @@ function createMazeBorder(mazeDepth, mazeWidth) {
   maze.style.width = mazeWidthInPixel + 'px';
 }
 
-function createRandomWall() {
-  const randomWall = Math.floor(Math.random() * 2);
-  return randomWall;
-}
-
 function createPlainMaze(mazeDepth, mazeWidth) {
   const plainMaze = new Array(mazeDepth);
   for (depth = 0; depth < mazeDepth; depth++) {
@@ -69,12 +64,19 @@ function createPlainMaze(mazeDepth, mazeWidth) {
 
 function generateMazeBlueprint(mazeDepth, mazeWidth) {
   const mazeBluePrint = new createPlainMaze(mazeDepth, mazeWidth);
-   for (depth = 0; depth < mazeDepth; depth++) {
-    for (width = 0; width < mazeWidth; width++) {
-      const isNotWall = createRandomWall();
-      if (isNotWall === 0) {
-        mazeBluePrint[depth][width] = 0;
-      }
+  let isCravlingDone = 0;
+  let mazeDepthCrawl = Math.floor(mazeDepth / 2);
+  let mazeWidthCrawl = Math.floor(mazeWidth / 2);
+  while (isCravlingDone === 0) {
+    mazeBluePrint[mazeDepthCrawl][mazeWidthCrawl] = 0;
+    if (Math.floor(Math.random() * 2) === 0) {
+      mazeDepthCrawl += (Math.floor(Math.random() * 3) -1);
+    }
+    else {
+      mazeWidthCrawl += (Math.floor(Math.random() * 3) -1);
+    }
+    if (mazeDepthCrawl < 0 || mazeDepthCrawl >= mazeDepth || mazeWidthCrawl < 0 || mazeWidthCrawl >= mazeWidth) {
+      isCravlingDone = 1;
     }
   }
   return mazeBluePrint;
