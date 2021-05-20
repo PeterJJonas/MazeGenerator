@@ -2,7 +2,7 @@ const initMazeDepth = 19;
 const initMazeWidth = 16;
 
 const maze = document.getElementById('maze');
-const enter = document.getElementById('enter');
+const generatemaze = document.getElementById('generatemaze');
 const mazeDepth = document.getElementById('mazeDepth');
 const mazeWidth = document.getElementById('mazeWidth');
 
@@ -91,7 +91,7 @@ function putMazeOnScreen(mazeDepth,mazeWidth) {
 
 putMazeOnScreen(initMazeDepth, initMazeWidth);
 
-enter.addEventListener('click', getMazeSize);
+generatemaze.addEventListener('click', getMazeSize);
 
 mazeDepth.addEventListener('keyup',function(hitEnter) {
     if (hitEnter.keyCode === 13) {
@@ -99,7 +99,7 @@ mazeDepth.addEventListener('keyup',function(hitEnter) {
       const widthNumber = mazeWidth.value * 1;
       if (100 > depthNumber && depthNumber> 0) {
         if ((100 > widthNumber && widthNumber > 0)) {
-          document.getElementById('enter').focus();
+          document.getElementById('generatemaze').focus();
           getMazeSize();
         } else {
           document.getElementById('mazeWidth').focus();
@@ -114,7 +114,7 @@ mazeWidth.addEventListener('keyup',function(hitEnter) {
       const widthNumber = mazeWidth.value * 1;
       if (100 > widthNumber && widthNumber > 0) {
         if (100 > depthNumber && depthNumber> 0) {
-          document.getElementById('enter').focus();
+          document.getElementById('generatemaze').focus();
           getMazeSize();
         } else {
           document.getElementById('mazeDepth').focus();
