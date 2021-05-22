@@ -6,6 +6,13 @@ const generatemaze = document.getElementById('generatemaze');
 const mazeDepth = document.getElementById('mazeDepth');
 const mazeWidth = document.getElementById('mazeWidth');
 
+function randomNumber(min, max) {
+    // min = Math.ceil(min);
+    // max = Math.floor(max);
+    const randomNumber =  Math.floor(Math.random() * (max - min +1)) + min;
+    return randomNumber;
+}
+
 function getMazeSize () {
   const getMazeDepth = document.getElementById("mazeDepth").value;
   const getMazeWidth = document.getElementById("mazeWidth").value;
@@ -69,11 +76,11 @@ function generateMazeBlueprint(mazeDepth, mazeWidth) {
   let mazeWidthCrawl = Math.floor(mazeWidth / 2);
   while (isCravlingDone === 0) {
     mazeBluePrint[mazeDepthCrawl][mazeWidthCrawl] = 0;
-    if (Math.floor(Math.random() * 2) === 0) {
-      mazeDepthCrawl += (Math.floor(Math.random() * 3) -1);
+    if (randomNumber(0, 1) === 0) {
+      mazeDepthCrawl += (randomNumber(-1, 1));
     }
     else {
-      mazeWidthCrawl += (Math.floor(Math.random() * 3) -1);
+      mazeWidthCrawl += (randomNumber(-1, 1));
     }
     if (mazeDepthCrawl < 0 || mazeDepthCrawl >= mazeDepth || mazeWidthCrawl < 0 || mazeWidthCrawl >= mazeWidth) {
       isCravlingDone = 1;
