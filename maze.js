@@ -42,7 +42,7 @@ function drawMaze(mazeDepth, mazeWidth, mazeBluePrint) {
   }
 }
 
-function createMazeBorder(mazeDepth, mazeWidth) {
+function calculateMazeSize(mazeDepth, mazeWidth) {
   const mazeDepthInPixel = mazeDepth * 20;
   maze.style.height = mazeDepthInPixel + 'px';
   const mazeWidthInPixel = mazeWidth * 20;
@@ -84,7 +84,7 @@ function generateMazeBlueprint(mazeDepth, mazeWidth) {
 
 function putMazeOnScreen(mazeDepth,mazeWidth) {
   const mazeBluePrint = new generateMazeBlueprint(mazeDepth, mazeWidth);
-  createMazeBorder(mazeDepth, mazeWidth);
+  calculateMazeSize(mazeDepth, mazeWidth);
   checkScreenSize(mazeWidth);
   drawMaze(mazeDepth, mazeWidth, mazeBluePrint);
 }
