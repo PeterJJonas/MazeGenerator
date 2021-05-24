@@ -57,8 +57,8 @@ table {
   margin: auto;
 }
 
-#mazeDepth, #mazeWidth, #enter {
-  width: 35vw;
+#mazeDepth, #mazeWidth, #generatemaze {
+  width: 45vw;
   height: auto;
   font-size: 6vw;
 }
