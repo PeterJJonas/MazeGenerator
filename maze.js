@@ -6,6 +6,22 @@ const generatemaze = document.getElementById('generatemaze');
 const mazeDepth = document.getElementById('mazeDepth');
 const mazeWidth = document.getElementById('mazeWidth');
 
+function getEmptyCorridors(mazeBluePrint) {
+  const mazeDepth = mazeBluePrint.length;
+  const mazeWidth = mazeBluePrint[0].length;
+  let i = 0
+  let emptyCorridors = Array;
+  for (depth = 0; depth < mazeDepth; depth++) {
+    for (width = 0; width < mazeWidth; width++) {
+      if (mazeBluePrint[depth][width] === 0) {
+        emptyCorridors[i] = [depth, width];
+        i++;
+      }
+    }
+  }
+  return emptyCorridors;
+}
+
 function randomIntNumber(min, max) {
   const randomIntNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   return randomIntNumber;
@@ -35,16 +51,23 @@ function checkScreenSize(mazeWidth) {
 }
 
 function drawMaze(mazeDepth, mazeWidth, mazeBluePrint) {
+  let emptyCorridors = Array;
+  let isCorridor = 0
   for (depth = 0; depth < mazeDepth; depth++) {
     for (width = 0; width < mazeWidth; width++) {
       const div = document.createElement('div');
       if (mazeBluePrint[depth][width] === 1) {
         maze.appendChild(div).classList.add('wall');
+        maze.appendChild(div).id = ('wall-D'+depth+'W'+width);
       } else {
         maze.appendChild(div).classList.add('corridor');
+        maze.appendChild(div).id = ('corridor-D'+depth+'W'+width);
+        emptyCorridors[isCorridor] = [depth, width];
+        isCorridor++;
       }
     }
   }
+  return(emptyCorridors);
 }
 
 function calculateMazeSize(mazeDepth, mazeWidth) {
@@ -90,7 +113,9 @@ function putMazeOnScreen(mazeDepth, mazeWidth) {
   const mazeBluePrint = new generateMazeBlueprint(mazeDepth, mazeWidth);
   calculateMazeSize(mazeDepth, mazeWidth);
   checkScreenSize(mazeWidth);
-  drawMaze(mazeDepth, mazeWidth, mazeBluePrint);
+  const emptyCorridors = drawMaze(mazeDepth, mazeWidth, mazeBluePrint);
+  const playerStartPosition = ('corridor-D'+emptyCorridors[0][0]+'W'+emptyCorridors[0][1])
+  document.getElementById(playerStartPosition).style.backgroundColor='red';
 }
 
 putMazeOnScreen(initMazeDepth, initMazeWidth);
