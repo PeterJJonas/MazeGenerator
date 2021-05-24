@@ -97,13 +97,13 @@ table {
 }
 
 @media only screen and (min-width: 780px) {
-  #mazeDepth, #mazeWidth, #enter {
+  #mazeDepth, #mazeWidth, #generatemaze {
     font-size: 4vw;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  #mazeDepth, #mazeWidth, #enter {
+  #mazeDepth, #mazeWidth, #generatemaze {
     font-size: 2vw;
   }
 }
