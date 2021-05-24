@@ -6,6 +6,36 @@ const generatemaze = document.getElementById('generatemaze');
 const mazeDepth = document.getElementById('mazeDepth');
 const mazeWidth = document.getElementById('mazeWidth');
 
+function playerController(playerPosDepth, playerPosWidth) {
+  let playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+  document.getElementById(playerPosition).style.backgroundColor='red';
+  document.onkeydown = function(gameInput) {
+    switch (gameInput.keyCode) {
+       case 37:
+       playerPosWidth = playerPosWidth - 1;
+       playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+       document.getElementById(playerPosition).style.backgroundColor='red';
+        break;
+       case 38:
+       playerPosDepth = playerPosDepth - 1;
+       playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+       document.getElementById(playerPosition).style.backgroundColor='red';
+        break;
+       case 39:
+       playerPosWidth = playerPosWidth + 1;
+       playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+       document.getElementById(playerPosition).style.backgroundColor='red';
+        break;
+       case 40:
+        playerPosDepth = playerPosDepth + 1;
+        playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+        document.getElementById(playerPosition).style.backgroundColor='red';
+       break;
+    }
+  };
+}
+
+
 function getEmptyCorridors(mazeBluePrint) {
   const mazeDepth = mazeBluePrint.length;
   const mazeWidth = mazeBluePrint[0].length;
@@ -114,8 +144,7 @@ function putMazeOnScreen(mazeDepth, mazeWidth) {
   calculateMazeSize(mazeDepth, mazeWidth);
   checkScreenSize(mazeWidth);
   const emptyCorridors = drawMaze(mazeDepth, mazeWidth, mazeBluePrint);
-  const playerStartPosition = ('corridor-D'+emptyCorridors[0][0]+'W'+emptyCorridors[0][1])
-  document.getElementById(playerStartPosition).style.backgroundColor='red';
+  playerController(emptyCorridors[0][0], emptyCorridors[0][1]);
 }
 
 putMazeOnScreen(initMazeDepth, initMazeWidth);
