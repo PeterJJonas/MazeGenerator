@@ -65,20 +65,26 @@ function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
 }
 
 
-function getEmptyCorridors(mazeBluePrint) {
-  const mazeDepth = mazeBluePrint.length;
-  const mazeWidth = mazeBluePrint[0].length;
-  let i = 0
-  let emptyCorridors = Array;
-  for (depth = 0; depth < mazeDepth; depth++) {
-    for (width = 0; width < mazeWidth; width++) {
-      if (mazeBluePrint[depth][width] === 0) {
-        emptyCorridors[i] = [depth, width];
-        i++;
-      }
-    }
-  }
-  return emptyCorridors;
+// function getEmptyCorridors(mazeBluePrint) {
+//   const mazeDepth = mazeBluePrint.length;
+//   const mazeWidth = mazeBluePrint[0].length;
+//   let i = 0
+//   let emptyCorridors = new Array;
+//   for (depth = 0; depth < mazeDepth; depth++) {
+//     for (width = 0; width < mazeWidth; width++) {
+//       if (mazeBluePrint[depth][width] === 0) {
+//         emptyCorridors[i] = [depth, width];
+//         i++;
+//       }
+//     }
+//   }
+//   return emptyCorridors;
+// }
+
+function randomPosition (emptyCorridors) {
+  const maxPosition = (emptyCorridors.length) -1;
+  const position = randomIntNumber(1, maxPosition);
+  return emptyCorridors[position];
 }
 
 function randomIntNumber(min, max) {
@@ -110,7 +116,7 @@ function checkScreenSize(mazeWidth) {
 }
 
 function drawMaze(mazeDepth, mazeWidth, mazeBluePrint) {
-  let emptyCorridors = Array;
+  let emptyCorridors = new Array();
   let isCorridor = 0
   for (depth = 0; depth < mazeDepth; depth++) {
     for (width = 0; width < mazeWidth; width++) {
@@ -161,7 +167,7 @@ function generateMazeBlueprint(mazeDepth, mazeWidth) {
     } else {
       mazeWidthCrawl += (randomIntNumber(-1, 1));
     }
-    if (mazeDepthCrawl < 0 || mazeDepthCrawl >= mazeDepth || mazeWidthCrawl < 0 || mazeWidthCrawl >= mazeWidth) {
+    if (mazeDepthCrawl < 1 || mazeDepthCrawl >= mazeDepth -1 || mazeWidthCrawl < 1 || mazeWidthCrawl >= mazeWidth -1) {
       isCravlingDone = 1;
     }
   }
@@ -173,7 +179,8 @@ function putMazeOnScreen(mazeDepth, mazeWidth) {
   calculateMazeSize(mazeDepth, mazeWidth);
   checkScreenSize(mazeWidth);
   const emptyCorridors = drawMaze(mazeDepth, mazeWidth, mazeBluePrint);
-  playerController(mazeBluePrint, emptyCorridors[0][0], emptyCorridors[0][1]);
+  const playerStartPosition = randomPosition(emptyCorridors);
+  playerController(mazeBluePrint, playerStartPosition[0], playerStartPosition[1]);
 }
 
 putMazeOnScreen(initMazeDepth, initMazeWidth);
@@ -184,8 +191,8 @@ mazeDepth.addEventListener('keyup', function(hitEnter) {
   if (hitEnter.keyCode === 13) {
     const depthNumber = mazeDepth.value * 1;
     const widthNumber = mazeWidth.value * 1;
-    if (100 > depthNumber && depthNumber > 0) {
-      if ((100 > widthNumber && widthNumber > 0)) {
+    if (100 > depthNumber && depthNumber >= 5) {
+      if (100 > widthNumber && widthNumber >= 5) {
         document.getElementById('generatemaze').focus();
         getMazeSize();
       } else {
@@ -199,8 +206,8 @@ mazeWidth.addEventListener('keyup', function(hitEnter) {
   if (hitEnter.keyCode === 13) {
     const depthNumber = mazeDepth.value * 1;
     const widthNumber = mazeWidth.value * 1;
-    if (100 > widthNumber && widthNumber > 0) {
-      if (100 > depthNumber && depthNumber > 0) {
+    if (100 > widthNumber && widthNumber >= 5) {
+      if (100 > depthNumber && depthNumber >= 5) {
         document.getElementById('generatemaze').focus();
         getMazeSize();
       } else {
