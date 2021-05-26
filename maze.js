@@ -6,30 +6,59 @@ const generatemaze = document.getElementById('generatemaze');
 const mazeDepth = document.getElementById('mazeDepth');
 const mazeWidth = document.getElementById('mazeWidth');
 
-function playerController(playerPosDepth, playerPosWidth) {
+function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
   let playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
   document.getElementById(playerPosition).style.backgroundColor='red';
   document.onkeydown = function(gameInput) {
     switch (gameInput.keyCode) {
-       case 37:
-       playerPosWidth = playerPosWidth - 1;
-       playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
-       document.getElementById(playerPosition).style.backgroundColor='red';
+       case 37: // Left Arrow
+        playerOldPosWidth = playerPosWidth;
+        playerPosWidth = playerPosWidth - 1;
+        if (mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
+          playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+          document.getElementById(playerPosition).style.backgroundColor='red';
+          playerOldPosition = ('corridor-D' + playerPosDepth + 'W' + playerOldPosWidth);
+          document.getElementById(playerOldPosition).style.backgroundColor='';
+        } else {
+          playerPosWidth = playerOldPosWidth;
+        }
         break;
-       case 38:
-       playerPosDepth = playerPosDepth - 1;
-       playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
-       document.getElementById(playerPosition).style.backgroundColor='red';
+       case 38: // Up Arrow
+        playerOldPosDepth = playerPosDepth;
+        playerPosDepth = playerPosDepth - 1;
+        if (playerPosDepth >= 0 && mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
+          playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+          document.getElementById(playerPosition).style.backgroundColor='red';
+          playerOldPosition = ('corridor-D' + playerOldPosDepth + 'W' + playerPosWidth);
+          document.getElementById(playerOldPosition).style.backgroundColor='';
+        } else {
+          playerPosDepth = playerOldPosDepth;
+        }
         break;
-       case 39:
-       playerPosWidth = playerPosWidth + 1;
-       playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
-       document.getElementById(playerPosition).style.backgroundColor='red';
+       case 39: //Right Arrow
+        playerOldPosWidth = playerPosWidth;
+        playerPosWidth = playerPosWidth + 1;
+        if (mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
+          playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+          document.getElementById(playerPosition).style.backgroundColor='red';
+          playerOldPosition = ('corridor-D' + playerPosDepth + 'W' + playerOldPosWidth);
+          document.getElementById(playerOldPosition).style.backgroundColor='';
+        } else {
+          playerPosWidth = playerOldPosWidth;
+        }
         break;
-       case 40:
-        playerPosDepth = playerPosDepth + 1;
-        playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
-        document.getElementById(playerPosition).style.backgroundColor='red';
+       case 40: // Down Arrow
+       const mazeDepth = mazeBluePrint.length;
+       playerOldPosDepth = playerPosDepth;
+       playerPosDepth = playerPosDepth + 1;
+       if (playerPosDepth < mazeDepth && mazeBluePrint[playerPosDepth][playerPosWidth] === 0 ) {
+         playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+         document.getElementById(playerPosition).style.backgroundColor='red';
+         playerOldPosition = ('corridor-D' + playerOldPosDepth + 'W' + playerPosWidth);
+         document.getElementById(playerOldPosition).style.backgroundColor='';
+       } else {
+         playerPosDepth = playerOldPosDepth;
+       }
        break;
     }
   };
@@ -144,7 +173,7 @@ function putMazeOnScreen(mazeDepth, mazeWidth) {
   calculateMazeSize(mazeDepth, mazeWidth);
   checkScreenSize(mazeWidth);
   const emptyCorridors = drawMaze(mazeDepth, mazeWidth, mazeBluePrint);
-  playerController(emptyCorridors[0][0], emptyCorridors[0][1]);
+  playerController(mazeBluePrint, emptyCorridors[0][0], emptyCorridors[0][1]);
 }
 
 putMazeOnScreen(initMazeDepth, initMazeWidth);
