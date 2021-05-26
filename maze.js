@@ -82,8 +82,8 @@ function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
 // }
 
 function randomPosition (emptyCorridors) {
-  const maxPosition = emptyCorridors.length;
-  const position = randomIntNumber(0, maxPosition);
+  const maxPosition = (emptyCorridors.length) -1;
+  const position = randomIntNumber(1, maxPosition);
   return emptyCorridors[position];
 }
 
@@ -167,7 +167,7 @@ function generateMazeBlueprint(mazeDepth, mazeWidth) {
     } else {
       mazeWidthCrawl += (randomIntNumber(-1, 1));
     }
-    if (mazeDepthCrawl < 0 || mazeDepthCrawl >= mazeDepth || mazeWidthCrawl < 0 || mazeWidthCrawl >= mazeWidth) {
+    if (mazeDepthCrawl < 1 || mazeDepthCrawl >= mazeDepth -1 || mazeWidthCrawl < 1 || mazeWidthCrawl >= mazeWidth -1) {
       isCravlingDone = 1;
     }
   }
@@ -191,8 +191,8 @@ mazeDepth.addEventListener('keyup', function(hitEnter) {
   if (hitEnter.keyCode === 13) {
     const depthNumber = mazeDepth.value * 1;
     const widthNumber = mazeWidth.value * 1;
-    if (100 > depthNumber && depthNumber > 0) {
-      if ((100 > widthNumber && widthNumber > 0)) {
+    if (100 > depthNumber && depthNumber >= 5) {
+      if (100 > widthNumber && widthNumber >= 5) {
         document.getElementById('generatemaze').focus();
         getMazeSize();
       } else {
@@ -206,8 +206,8 @@ mazeWidth.addEventListener('keyup', function(hitEnter) {
   if (hitEnter.keyCode === 13) {
     const depthNumber = mazeDepth.value * 1;
     const widthNumber = mazeWidth.value * 1;
-    if (100 > widthNumber && widthNumber > 0) {
-      if (100 > depthNumber && depthNumber > 0) {
+    if (100 > widthNumber && widthNumber >= 5) {
+      if (100 > depthNumber && depthNumber >= 5) {
         document.getElementById('generatemaze').focus();
         getMazeSize();
       } else {
