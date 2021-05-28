@@ -10,8 +10,8 @@ function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
   let playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
   document.getElementById(playerPosition).style.backgroundColor='red';
   document.onkeydown = function(gameInput) {
-    switch (gameInput.keyCode) {
-       case 37: // Left Arrow
+    switch (gameInput.key) {
+       case 'a': // Left
         playerOldPosWidth = playerPosWidth;
         playerPosWidth = playerPosWidth - 1;
         if (mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
@@ -23,7 +23,7 @@ function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
           playerPosWidth = playerOldPosWidth;
         }
         break;
-       case 38: // Up Arrow
+       case 'w': // Up
         playerOldPosDepth = playerPosDepth;
         playerPosDepth = playerPosDepth - 1;
         if (playerPosDepth >= 0 && mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
@@ -35,7 +35,7 @@ function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
           playerPosDepth = playerOldPosDepth;
         }
         break;
-       case 39: //Right Arrow
+       case 'd': //Right
         playerOldPosWidth = playerPosWidth;
         playerPosWidth = playerPosWidth + 1;
         if (mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
@@ -47,7 +47,7 @@ function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
           playerPosWidth = playerOldPosWidth;
         }
         break;
-       case 40: // Down Arrow
+       case 's': // Down
        const mazeDepth = mazeBluePrint.length;
        playerOldPosDepth = playerPosDepth;
        playerPosDepth = playerPosDepth + 1;
