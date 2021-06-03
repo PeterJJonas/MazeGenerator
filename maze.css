@@ -57,7 +57,7 @@ table {
   margin: auto;
 }
 
-#mazeDepth, #mazeWidth, #generatemaze {
+#setMazeDepth, #setMazeWidth, #generatemaze {
   width: 45vw;
   height: auto;
   font-size: 6vw;
@@ -97,13 +97,13 @@ table {
 }
 
 @media only screen and (min-width: 780px) {
-  #mazeDepth, #mazeWidth, #generatemaze {
+  #setMazeDepth, #setMazeWidth, #generatemaze {
     font-size: 4vw;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  #mazeDepth, #mazeWidth, #generatemaze {
+  #setMazeDepth, #setMazeWidth, #generatemaze {
     font-size: 2vw;
   }
 }
