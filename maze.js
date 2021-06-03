@@ -1,10 +1,10 @@
-const initMazeDepth = 19;
-const initMazeWidth = 16;
+const initMazeDepth = 16;
+const initMazeWidth = 19;
 
 const maze = document.getElementById('maze');
 const generatemaze = document.getElementById('generatemaze');
-const mazeDepth = document.getElementById('mazeDepth');
-const mazeWidth = document.getElementById('mazeWidth');
+const setMazeDepth = document.getElementById('setMazeDepth');
+const setMazeWidth = document.getElementById('setMazeWidth');
 
 function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
   let playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
@@ -69,7 +69,7 @@ function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
 //   const mazeDepth = mazeBluePrint.length;
 //   const mazeWidth = mazeBluePrint[0].length;
 //   let i = 0
-//   let emptyCorridors = new Array;
+//   let emptyCorridors = new Array();
 //   for (depth = 0; depth < mazeDepth; depth++) {
 //     for (width = 0; width < mazeWidth; width++) {
 //       if (mazeBluePrint[depth][width] === 0) {
@@ -93,8 +93,8 @@ function randomIntNumber(min, max) {
 }
 
 function getMazeSize() {
-  const getMazeDepth = document.getElementById("mazeDepth").value;
-  const getMazeWidth = document.getElementById("mazeWidth").value;
+  const getMazeDepth = document.getElementById("setMazeDepth").value;
+  const getMazeWidth = document.getElementById("setMazeWidth").value;
   const mazeDepth = Math.round(getMazeDepth * 1);
   const mazeWidth = Math.round(getMazeWidth * 1);
   if (100 > mazeDepth && mazeDepth > 0 && 100 > mazeWidth && mazeWidth > 0) {
@@ -142,6 +142,24 @@ function calculateMazeSize(mazeDepth, mazeWidth) {
   maze.style.width = mazeWidthInPixel + 'px';
 }
 
+function countSquareNeighbours(mazeBluePrint, mazeDepth, mazeWidth, mazeDepthCrawl, mazeWidthCrawl) {
+  let countedNeighbours = 0;
+  if (mazeDepthCrawl <= 0 || mazeDepthCrawl >= mazeDepth - 1 || mazeWidthCrawl <= 0 || mazeWidthCrawl >= mazeWidth - 1) return 5;
+  if (mazeBluePrint[mazeDepthCrawl - 1][mazeWidthCrawl] === 0) {
+      countedNeighbours++;
+  }
+  if (mazeBluePrint[mazeDepthCrawl + 1][mazeWidthCrawl] === 0) {
+     countedNeighbours++;
+  }
+  if (mazeBluePrint[mazeDepthCrawl][mazeWidthCrawl - 1] === 0) {
+     countedNeighbours++;
+  }
+  if (mazeBluePrint[mazeDepthCrawl][mazeWidthCrawl + 1] === 0) {
+     countedNeighbours++;
+  }
+  return countedNeighbours;
+}
+
 function createPlainMaze(mazeDepth, mazeWidth) {
   const plainMaze = new Array(mazeDepth);
   for (depth = 0; depth < mazeDepth; depth++) {
@@ -155,21 +173,29 @@ function createPlainMaze(mazeDepth, mazeWidth) {
   return plainMaze;
 }
 
+function addWallLocations(wallLocations, depthPos, widthPos) {
+  wallLocations.push([depthPos - 1, widthPos]);
+  wallLocations.push([depthPos + 1, widthPos]);
+  wallLocations.push([depthPos, widthPos - 1]);
+  wallLocations.push([depthPos, widthPos + 1]);
+}
+
 function generateMazeBlueprint(mazeDepth, mazeWidth) {
   const mazeBluePrint = new createPlainMaze(mazeDepth, mazeWidth);
-  let isCravlingDone = 0;
-  let mazeDepthCrawl = Math.floor(mazeDepth / 2);
-  let mazeWidthCrawl = Math.floor(mazeWidth / 2);
-  while (isCravlingDone === 0) {
-    mazeBluePrint[mazeDepthCrawl][mazeWidthCrawl] = 0;
-    if (randomIntNumber(0, 1) === 0) {
-      mazeDepthCrawl += (randomIntNumber(-1, 1));
-    } else {
-      mazeWidthCrawl += (randomIntNumber(-1, 1));
+  const depthStartPosCrawl = 2;
+  const widthStartPosCrawl = 2;
+  mazeBluePrint[depthStartPosCrawl][widthStartPosCrawl] = 0;
+  let wallLocations = new Array();
+  addWallLocations(wallLocations, depthStartPosCrawl, widthStartPosCrawl);
+  while (wallLocations.length > 0) {
+    randomWallCheck = randomIntNumber(0, (wallLocations.length - 1));
+    nextDepthPos = wallLocations[randomWallCheck][0];
+    nextWidthPos = wallLocations[randomWallCheck][1];
+    if (countSquareNeighbours(mazeBluePrint, mazeDepth, mazeWidth, nextDepthPos, nextWidthPos) === 1) {
+      mazeBluePrint[nextDepthPos][nextWidthPos] = 0;
+      addWallLocations(wallLocations, nextDepthPos, nextWidthPos);
     }
-    if (mazeDepthCrawl < 1 || mazeDepthCrawl >= mazeDepth -1 || mazeWidthCrawl < 1 || mazeWidthCrawl >= mazeWidth -1) {
-      isCravlingDone = 1;
-    }
+    wallLocations.splice(randomWallCheck, 1);
   }
   return mazeBluePrint;
 }
@@ -187,31 +213,31 @@ putMazeOnScreen(initMazeDepth, initMazeWidth);
 
 generatemaze.addEventListener('click', getMazeSize);
 
-mazeDepth.addEventListener('keyup', function(hitEnter) {
+setMazeDepth.addEventListener('keyup', function(hitEnter) {
   if (hitEnter.keyCode === 13) {
-    const depthNumber = mazeDepth.value * 1;
-    const widthNumber = mazeWidth.value * 1;
+    const depthNumber = setMazeDepth.value * 1;
+    const widthNumber = setMazeWidth.value * 1;
     if (100 > depthNumber && depthNumber >= 5) {
       if (100 > widthNumber && widthNumber >= 5) {
         document.getElementById('generatemaze').focus();
         getMazeSize();
       } else {
-        document.getElementById('mazeWidth').focus();
+        document.getElementById('setMazeWidth').focus();
       }
     }
   }
 });
 
-mazeWidth.addEventListener('keyup', function(hitEnter) {
+setMazeWidth.addEventListener('keyup', function(hitEnter) {
   if (hitEnter.keyCode === 13) {
-    const depthNumber = mazeDepth.value * 1;
-    const widthNumber = mazeWidth.value * 1;
+    const depthNumber = setMazeDepth.value * 1;
+    const widthNumber = setMazeWidth.value * 1;
     if (100 > widthNumber && widthNumber >= 5) {
       if (100 > depthNumber && depthNumber >= 5) {
         document.getElementById('generatemaze').focus();
         getMazeSize();
       } else {
-        document.getElementById('mazeDepth').focus();
+        document.getElementById('setMazeDepth').focus();
       }
     }
   }
