@@ -136,9 +136,9 @@ function drawMaze(mazeDepth, mazeWidth, mazeBluePrint) {
 }
 
 function calculateMazeSize(mazeDepth, mazeWidth) {
-  const mazeDepthInPixel = mazeDepth * 20;
+  const mazeDepthInPixel = (mazeDepth * 20) + 2;
   maze.style.height = mazeDepthInPixel + 'px';
-  const mazeWidthInPixel = mazeWidth * 20;
+  const mazeWidthInPixel = (mazeWidth * 20) + 2;
   maze.style.width = mazeWidthInPixel + 'px';
 }
 
