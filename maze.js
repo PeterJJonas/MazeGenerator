@@ -6,64 +6,88 @@ const generatemaze = document.getElementById('generatemaze');
 const setMazeDepth = document.getElementById('setMazeDepth');
 const setMazeWidth = document.getElementById('setMazeWidth');
 
+const upButton = document.getElementById('upButton');
+const downButton = document.getElementById('downButton');
+const leftButton = document.getElementById('leftButton');
+const rightButton = document.getElementById('rightButton');
+
 function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
   let playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
   document.getElementById(playerPosition).style.backgroundColor='red';
   document.onkeydown = function(gameInput) {
     switch (gameInput.key) {
        case 'a': // Left
-        playerOldPosWidth = playerPosWidth;
-        playerPosWidth = playerPosWidth - 1;
-        if (mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
-          playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
-          document.getElementById(playerPosition).style.backgroundColor='red';
-          playerOldPosition = ('corridor-D' + playerPosDepth + 'W' + playerOldPosWidth);
-          document.getElementById(playerOldPosition).style.backgroundColor='';
-        } else {
-          playerPosWidth = playerOldPosWidth;
-        }
+       goLeft();
         break;
        case 'w': // Up
-        playerOldPosDepth = playerPosDepth;
-        playerPosDepth = playerPosDepth - 1;
-        if (playerPosDepth >= 0 && mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
-          playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
-          document.getElementById(playerPosition).style.backgroundColor='red';
-          playerOldPosition = ('corridor-D' + playerOldPosDepth + 'W' + playerPosWidth);
-          document.getElementById(playerOldPosition).style.backgroundColor='';
-        } else {
-          playerPosDepth = playerOldPosDepth;
-        }
+       goUp();
         break;
        case 'd': //Right
-        playerOldPosWidth = playerPosWidth;
-        playerPosWidth = playerPosWidth + 1;
-        if (mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
-          playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
-          document.getElementById(playerPosition).style.backgroundColor='red';
-          playerOldPosition = ('corridor-D' + playerPosDepth + 'W' + playerOldPosWidth);
-          document.getElementById(playerOldPosition).style.backgroundColor='';
-        } else {
-          playerPosWidth = playerOldPosWidth;
-        }
+       goRight();
         break;
        case 's': // Down
-       const mazeDepth = mazeBluePrint.length;
-       playerOldPosDepth = playerPosDepth;
-       playerPosDepth = playerPosDepth + 1;
-       if (playerPosDepth < mazeDepth && mazeBluePrint[playerPosDepth][playerPosWidth] === 0 ) {
-         playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
-         document.getElementById(playerPosition).style.backgroundColor='red';
-         playerOldPosition = ('corridor-D' + playerOldPosDepth + 'W' + playerPosWidth);
-         document.getElementById(playerOldPosition).style.backgroundColor='';
-       } else {
-         playerPosDepth = playerOldPosDepth;
-       }
-       break;
-    }
+       goDown();
+     }
   };
-}
 
+  upButton.addEventListener('click', goUp);
+  downButton.addEventListener('click', goDown);
+  leftButton.addEventListener('click', goLeft);
+  rightButton.addEventListener('click', goRight);
+
+  function goUp() {
+    playerOldPosDepth = playerPosDepth;
+    playerPosDepth = playerPosDepth - 1;
+    if (playerPosDepth >= 0 && mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
+      playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+      document.getElementById(playerPosition).style.backgroundColor='red';
+      playerOldPosition = ('corridor-D' + playerOldPosDepth + 'W' + playerPosWidth);
+      document.getElementById(playerOldPosition).style.backgroundColor='';
+    } else {
+      playerPosDepth = playerOldPosDepth;
+    }
+  }
+
+  function goDown() {
+    const mazeDepth = mazeBluePrint.length;
+    playerOldPosDepth = playerPosDepth;
+    playerPosDepth = playerPosDepth + 1;
+    if (playerPosDepth < mazeDepth && mazeBluePrint[playerPosDepth][playerPosWidth] === 0 ) {
+      playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+      document.getElementById(playerPosition).style.backgroundColor='red';
+      playerOldPosition = ('corridor-D' + playerOldPosDepth + 'W' + playerPosWidth);
+      document.getElementById(playerOldPosition).style.backgroundColor='';
+    } else {
+      playerPosDepth = playerOldPosDepth;
+    }
+  }
+
+  function goLeft() {
+    playerOldPosWidth = playerPosWidth;
+    playerPosWidth = playerPosWidth - 1;
+    if (mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
+      playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+      document.getElementById(playerPosition).style.backgroundColor='red';
+      playerOldPosition = ('corridor-D' + playerPosDepth + 'W' + playerOldPosWidth);
+      document.getElementById(playerOldPosition).style.backgroundColor='';
+    } else {
+      playerPosWidth = playerOldPosWidth;
+    }
+  }
+
+  function goRight() {
+    playerOldPosWidth = playerPosWidth;
+    playerPosWidth = playerPosWidth + 1;
+    if (mazeBluePrint[playerPosDepth][playerPosWidth] === 0) {
+      playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
+      document.getElementById(playerPosition).style.backgroundColor='red';
+      playerOldPosition = ('corridor-D' + playerPosDepth + 'W' + playerOldPosWidth);
+      document.getElementById(playerOldPosition).style.backgroundColor='';
+    } else {
+      playerPosWidth = playerOldPosWidth;
+    }
+  }
+}
 
 // function getEmptyCorridors(mazeBluePrint) {
 //   const mazeDepth = mazeBluePrint.length;

@@ -46,34 +46,72 @@ table {
 
 /* End reset CSS */
 
+
+
+
+
+
+
 * {
-  margin: 0;
-  padding: 0;
   background-color:  #e8e4c9;
 }
 
+
+html, body {
+  height:100%;
+}
+
+.container {
+	height: 100%;
+	margin: 20px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+
 #entersize {
-  text-align: center;
-  margin: auto;
+  margin: 30px;
 }
 
 #setMazeDepth, #setMazeWidth, #generatemaze {
-  width: 45vw;
-  height: auto;
+	margin: 5px;
   font-size: 6vw;
 }
 
 #gamescreen {
-  display: flex;
-  flex-wrap: wrap;
-  text-align: center;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	height: 350px;
+	margin: 30px;
+
 }
 
 #maze {
+	display: block;
+	justify-content: center;
+	text-align: center;
   margin: 20px;
   padding: 0px;
   position: absolute;
+	padding-bottom: 250px;
+}
+
+#controll {
+	position: -webkit-sticky;
+	position : sticky;
+	position : fixed;
+	bottom: 0px;
+	width: 98%;
+	padding-bottom: 3px;
+	padding-top: 3px;
+}
+
+button {
+	padding: 50px;
+	margin: 5px;
+	height: 50px;
+  font-size: 4vw;
 }
 
 .corridor {

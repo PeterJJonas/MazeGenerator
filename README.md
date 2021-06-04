@@ -1,5 +1,7 @@
 # Maze Generator
 
-## This is going to be a randomly generated Maze game.
+## This is a randomly (Prim's algorithm) generated Maze game.
 
-### at the very beginning yet...
+### at the very beginning yet
+
+### Please note it may not be perfect on your screen as the focus is not on the CSS.
