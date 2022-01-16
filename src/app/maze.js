@@ -11,7 +11,7 @@ const downButton = document.getElementById('downButton');
 const leftButton = document.getElementById('leftButton');
 const rightButton = document.getElementById('rightButton');
 
-function playerController(mazeBluePrint, playerPosDepth, playerPosWidth) {
+const playerController = (mazeBluePrint, playerPosDepth, playerPosWidth) => {
   let playerPosition = ('corridor-D' + playerPosDepth + 'W' + playerPosWidth);
   document.getElementById(playerPosition).style.backgroundColor='red';
   document.onkeydown = function(gameInput) {
