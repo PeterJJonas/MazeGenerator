@@ -4,7 +4,7 @@ module.exports = {
   mode: "development",
   entry: "./src/index.js",
   output: {
-    filename: "maze.js",
+    filename: "maze.mini.js",
     path: path.resolve(__dirname, "dist")
  }
 };
