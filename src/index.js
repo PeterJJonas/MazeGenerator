@@ -1,5 +1,6 @@
 import { playerController } from "./app/playerController";
 
+import "./css/reset.css";
 import "./main.css";
 
 const initMazeDepth = 16;

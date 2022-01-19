@@ -1,17 +1,24 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
 
 module.exports = {
   mode: "development",
   entry: "./src/index.js",
   output: {
-    filename: "maze.mini.js",
+    filename: "maze.[contenthash].js",
     path: path.resolve(__dirname, "dist"),
- },
+  },
+  plugins: [new HtmlWebpackPlugin({
+    template: "./src/template.html"
+  })],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          "style-loader", //Loads second
+          "css-loader" //Loads first
+        ],
       },
     ],
   },
