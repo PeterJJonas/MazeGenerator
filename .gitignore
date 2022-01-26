@@ -1,3 +1,5 @@
 _OldCodes
 dist
 node_modules
+.DS_Store
+.cache
